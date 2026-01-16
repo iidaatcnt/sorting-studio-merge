@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Play,
   Pause,
+  Search,
+  Waves,
   RotateCcw,
   StepForward,
   StepBack,
@@ -247,15 +249,15 @@ export default function MergeSortStudio() {
       <header className="border-b border-slate-200 bg-white/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-600/20">
-              <Layers className="text-white w-5 h-5" />
+            <div className="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center shadow-lg shadow-violet-600/20">
+              <Waves className="text-white w-5 h-5" />
             </div>
-            <h1 className="font-black italic tracking-tighter text-xl uppercase tracking-widest text-indigo-600">Merge_Sort_Studio</h1>
+            <h1 className="font-black italic tracking-tighter text-xl uppercase tracking-widest text-violet-600">マージソート (Merge Sort)</h1>
           </div>
           <div className="flex items-center gap-6">
             <div className="hidden md:flex items-center gap-4 text-[10px] mono uppercase text-slate-400 font-black tracking-widest">
               <div className="flex items-center gap-2">
-                <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-indigo-600 animate-pulse' : 'bg-slate-300'}`} />
+                <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-violet-600 animate-pulse' : 'bg-slate-300'}`} />
                 {isPlaying ? '実行中' : '停止中'}
               </div>
               <span>Step: {currentStep} / {steps.length - 1}</span>
@@ -273,7 +275,7 @@ export default function MergeSortStudio() {
 
           <div className="relative aspect-video lg:aspect-square max-h-[500px] bg-white rounded-[3rem] border border-slate-200 p-16 flex items-end justify-center gap-3 overflow-hidden shadow-xl">
             <div className="absolute top-8 left-12 flex items-center gap-3 mono text-[9px] text-slate-400 uppercase font-black tracking-[0.2em]">
-              <Merge size={14} className="text-indigo-600" />
+              <Waves size={14} className="text-violet-600" />
               マージソート・シミュレーター
             </div>
 
@@ -288,12 +290,12 @@ export default function MergeSortStudio() {
                   colorClass = "bg-slate-100 opacity-100";
                   if (isSelected) {
                     if (step.type === 'compare') colorClass = "bg-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.3)]";
-                    if (step.type === 'merge') colorClass = "bg-indigo-400 shadow-[0_0_25px_rgba(129,140,248,0.5)]";
+                    if (step.type === 'merge') colorClass = "bg-violet-400 shadow-[0_0_25px_rgba(167,139,250,0.5)]";
                   }
                 }
 
                 if (step.type === 'complete') {
-                  colorClass = "bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.3)] opacity-100";
+                  colorClass = "bg-violet-600 shadow-[0_0_20px_rgba(124,58,237,0.3)] opacity-100";
                 }
 
                 return (
@@ -304,7 +306,7 @@ export default function MergeSortStudio() {
                     style={{ height: `${val}%` }}
                     className={`flex-1 min-w-[20px] rounded-t-xl relative ${colorClass} transition-all duration-300`}
                   >
-                    <div className={`absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-black ${isSelected || inRange ? 'text-indigo-600' : 'text-slate-300'}`}>
+                    <div className={`absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-black ${isSelected || inRange ? 'text-violet-600' : 'text-slate-300'}`}>
                       {val}
                     </div>
                   </motion.div>
@@ -315,13 +317,13 @@ export default function MergeSortStudio() {
             {/* Range highlight */}
             {step.activeRange && step.type !== 'complete' && (
               <div
-                className="absolute bottom-6 h-1.5 bg-indigo-500/10 rounded-full transition-all duration-500"
+                className="absolute bottom-6 h-1.5 bg-violet-500/10 rounded-full transition-all duration-500"
                 style={{
                   left: `${(step.activeRange[0] / ARRAY_SIZE) * 100}%`,
                   width: `${((step.activeRange[1] - step.activeRange[0] + 1) / ARRAY_SIZE) * 100}%`
                 }}
               >
-                <div className="absolute inset-0 bg-indigo-500/30 blur-sm rounded-full" />
+                <div className="absolute inset-0 bg-violet-500/30 blur-sm rounded-full" />
               </div>
             )}
           </div>
@@ -332,7 +334,7 @@ export default function MergeSortStudio() {
                 <button onClick={stepBackward} className="p-4 bg-slate-100 text-slate-400 rounded-2xl hover:bg-slate-200 transition-colors"><StepBack size={20} /></button>
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-20 h-20 bg-indigo-600 text-white rounded-[2rem] flex items-center justify-center hover:bg-indigo-500 transition-all active:scale-95 shadow-xl shadow-indigo-600/20"
+                  className="w-20 h-20 bg-violet-600 text-white rounded-[2rem] flex items-center justify-center hover:bg-violet-500 transition-all active:scale-95 shadow-xl shadow-violet-600/20"
                 >
                   {isPlaying ? <Pause fill="currentColor" size={24} /> : <Play fill="currentColor" size={24} className="ml-1" />}
                 </button>
@@ -343,9 +345,9 @@ export default function MergeSortStudio() {
               <div className="flex-1 w-full">
                 <div className="flex items-center justify-between mono text-[10px] text-slate-400 uppercase font-black tracking-widest mb-3">
                   <span>再生スピード</span>
-                  <span className="text-indigo-600">{Math.round((speed / 980) * 100)} unit</span>
+                  <span className="text-violet-600">{Math.round((speed / 980) * 100)} unit</span>
                 </div>
-                <input type="range" min="100" max="980" value={speed} onChange={(e) => setSpeed(parseInt(e.target.value))} className="w-full appearance-none bg-slate-100 h-1.5 rounded-full accent-indigo-600 cursor-pointer" />
+                <input type="range" min="100" max="980" value={speed} onChange={(e) => setSpeed(parseInt(e.target.value))} className="w-full appearance-none bg-slate-100 h-1.5 rounded-full accent-violet-600 cursor-pointer" />
               </div>
             </div>
 
